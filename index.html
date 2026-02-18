@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flame.dev | Frontend Developer</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="description"
+    content="Flame.dev - Modern frontend developer creating clean, fast, and responsive websites.">
+  <meta name="keywords" content="Frontend, Developer, HTML, CSS, JavaScript, Responsive, Portfolio">
+  <meta name="author" content="Flame">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="logo">Flame<span>.dev</span></div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="navMenu">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#skills">Skills</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="nav-btn">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Modern Websites<br><span>Built Clean & Fast</span></h1>
+      <p>I create modern, responsive websites that load fast, look professional, and convert visitors into clients.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn primary">
+          <i class="fas fa-envelope"></i> Get in Touch
+        </a>
+        <a href="#about" class="btn ghost">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a frontend developer passionate about building clean, minimal, and highly functional websites.
+      I focus on performance, user experience, and modern design to make sure every project looks professional.
+    </p>
+    <p>
+      I love turning ideas into polished websites. Each site I build is responsive, visually clean, and optimized
+      for speed. I work with individuals, creators, and small businesses looking for a professional online presence
+      without overpaying.
+    </p>
+    <p>
+      My mission: Provide modern, reliable, and fast websites that clients love and users enjoy.
+    </p>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <h2>Services</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-paint-brush"></i>
+        <h3>UI/UX Design</h3>
+        <p>Clean layouts and smooth user experiences designed to build trust and clarity.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-code"></i>
+        <h3>Frontend Development</h3>
+        <p>Responsive websites built with clean HTML, CSS, and JavaScript code.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-rocket"></i>
+        <h3>Performance</h3>
+        <p>Fast load times, smooth interactions, and mobile-first optimization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <h2>Skills</h2>
+    <div class="skill-grid">
+      <span><i class="fab fa-html5"></i> HTML5</span>
+      <span><i class="fab fa-css3-alt"></i> CSS3</span>
+      <span><i class="fab fa-js-square"></i> JavaScript</span>
+      <span><i class="fas fa-mobile-alt"></i> Responsive Design</span>
+      <span><i class="fas fa-pencil-ruler"></i> UI/UX Basics</span>
+      <span><i class="fab fa-github"></i> Git & GitHub</span>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <h2>How I Work</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-text">
+          <strong>Understand your goal</strong>
+          <p>We discuss your vision, audience, and objectives.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-text">
+          <strong>Design & prototype</strong>
+          <p>Create wireframes and visual mockups for review.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-text">
+          <strong>Build & refine</strong>
+          <p>Develop a responsive, performant website with iterations.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <div class="step-text">
+          <strong>Deliver & support</strong>
+          <p>Launch your site and provide ongoing assistance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>If you want a modern, clean, and functional website, reach out today.</p>
+    <a href="mailto:flamzyxd12@gmail.com" class="btn primary">
+      <i class="fas fa-envelope"></i> Email Me
+    </a>
+  </section>
+
+  <!-- SCROLL TO TOP -->
+  <button id="scrollTop" title="Go to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Flame.dev
+  </footer>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
