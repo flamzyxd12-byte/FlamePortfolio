@@ -509,3 +509,8 @@ footer {
   opacity: 1;
   visibility: visible;
 }
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
