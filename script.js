@@ -1,7 +1,7 @@
 // INTERSECTION OBSERVER ANIMATION
 // Exclude the hero section so it's visible immediately on load
 const animatedElements = document.querySelectorAll(
-  "section:not(.hero), .service-card, .skill-grid span, .step"
+  "section:not(.hero), .service-card, .skill-item, .step"
 );
 const observer = new IntersectionObserver(
   (entries) => {
@@ -17,6 +17,25 @@ const observer = new IntersectionObserver(
 animatedElements.forEach((el) => {
   el.classList.add("hidden");
   observer.observe(el);
+});
+
+// SKILL MASTERY (randomized above 85%)
+const skillItems = document.querySelectorAll(".skill-item");
+
+skillItems.forEach((item) => {
+  const skillName = item.dataset.skill;
+  const icon = item.dataset.icon;
+  const mastery = Math.floor(Math.random() * 14) + 86; // 86% - 99%
+
+  item.innerHTML = `
+    <div class="skill-title">
+      <span class="skill-name"><i class="${icon}"></i> ${skillName}</span>
+      <span class="skill-percent">${mastery}%</span>
+    </div>
+    <div class="skill-bar" role="progressbar" aria-label="${skillName} mastery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${mastery}">
+      <div class="skill-progress" style="width: ${mastery}%;"></div>
+    </div>
+  `;
 });
 
 // SCROLL TO TOP
