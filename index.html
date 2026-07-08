@@ -28,8 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         body {
@@ -82,15 +81,15 @@
             </div>
 
             <div>
-                <a href="#contact" class="px-4 py-2 bg-white text-black font-medium text-xs rounded-full hover:bg-transparent hover:text-white border border-white transition-all duration-300">Let's Connect</a>
+                <a href="mailto:flamzyxd12@Gmail.com" class="px-4 py-2 bg-white text-black font-medium text-xs rounded-full hover:bg-transparent hover:text-white border border-white transition-all duration-300">Let's Connect</a>
             </div>
         </nav>
     </header>
 
     <main class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12">
 
-        <section id="home" class="min-h-screen flex flex-col justify-center pt-24 relative">
-            <div class="space-y-6 max-w-2xl">
+        <section id="home" class="min-h-screen grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-24 relative">
+            <div class="md:col-span-7 space-y-6 text-left">
                 <div class="inline-flex items-center gap-2 px-3 py-1 glass-card rounded-full text-xs font-medium text-blue-400 border-white/5">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> Building and learning every day
                 </div>
@@ -98,13 +97,17 @@
                     Hi, I'm <span class="gradient-text">Ryan</span>. <br>
                     <span class="text-neutral-400 text-2xl md:text-4xl font-medium">I build web interfaces.</span>
                 </h1>
-                <p class="text-base text-neutral-400 font-light leading-relaxed">
+                <p class="text-base text-neutral-400 font-light leading-relaxed max-w-xl">
                     I am a frontend developer with six months of dedicated hands-on experience coding layouts and interactive features. I focus on writing clean HTML, styling with Tailwind CSS, and bringing elements to life with JavaScript.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
                     <a href="#work" class="px-6 py-3 bg-accentBlue text-white text-sm font-medium rounded-full hover:bg-blue-600 transition-all shadow-md shadow-blue-500/10">See What I Built</a>
                     <a href="#contact" class="px-6 py-3 glass-card text-white text-sm font-medium rounded-full hover:bg-white/5 transition-all border-white/10">Get in Touch</a>
                 </div>
+            </div>
+            
+            <div class="md:col-span-5 h-[300px] md:h-[400px] w-full relative">
+                <div id="three-canvas-container" class="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing"></div>
             </div>
         </section>
 
@@ -224,39 +227,36 @@
             </div>
         </section>
 
-        <section id="contact" class="py-24 border-t border-white/5">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-                <div class="md:col-span-5 space-y-4">
-                    <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue">Get In Touch</h2>
-                    <h3 class="text-2xl font-bold tracking-tight text-white">Let's talk about opportunities.</h3>
-                    <p class="text-neutral-400 font-light text-sm leading-relaxed">
-                        I am currently looking for an entry-level role, internship, or small freelance layout modifications to continue building my experience. If you need someone who is honest about what they can do and works hard to learn the rest, let's talk.
-                    </p>
-                    <div class="flex gap-3 text-base pt-2">
-                        <a href="#" class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center hover:bg-white/10 hover:text-accentBlue transition-colors"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center hover:bg-white/10 hover:text-accentBlue transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center hover:bg-white/10 hover:text-accentBlue transition-colors"><i class="fa-solid fa-envelope"></i></a>
-                    </div>
-                </div>
+        <section id="contact" class="py-24 border-t border-white/5 max-w-3xl mx-auto text-center space-y-8">
+            <div class="space-y-2">
+                <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue">Get In Touch</h2>
+                <h3 class="text-3xl font-bold tracking-tight text-white">Let's talk about opportunities.</h3>
+                <p class="text-neutral-400 font-light text-sm max-w-xl mx-auto leading-relaxed">
+                    I am open to entry-level frontend roles, internships, or web interface projects. Drop me a line directly on either of my active channels below.
+                </p>
+            </div>
 
-                <div class="md:col-span-7 w-full">
-                    <form id="contact-form" class="glass-card p-6 rounded-2xl border-white/5 space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-[11px] uppercase tracking-wider font-semibold text-neutral-400">Name</label>
-                                <input type="text" required class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-accentBlue transition-colors font-light text-xs" placeholder="Your Name">
-                            </div>
-                            <div class="space-y-1">
-                                <label class="text-[11px] uppercase tracking-wider font-semibold text-neutral-400">Email</label>
-                                <input type="email" required class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-accentBlue transition-colors font-light text-xs" placeholder="you@example.com">
-                            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+                <a href="mailto:flamzyxd12@Gmail.com" class="glass-card p-5 rounded-2xl border-white/5 flex items-center justify-between group hover:border-blue-500/30 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-accentBlue flex items-center justify-center text-lg"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="text-left">
+                            <span class="text-[10px] font-semibold text-neutral-500 block uppercase tracking-wider">Email Me</span>
+                            <span class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors">flamzyxd12@Gmail.com</span>
                         </div>
-                        <div class="space-y-1">
-                            <label class="text-[11px] uppercase tracking-wider font-semibold text-neutral-400">Message</label>
-                            <textarea rows="4" required class="w-full bg-neutral-900/50 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-accentBlue transition-colors font-light text-xs resize-none" placeholder="How can I help you?"></textarea>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs text-neutral-600 group-hover:text-accentBlue group-hover:translate-x-1 transition-all"></i>
+                </a>
+
+                <div class="glass-card p-5 rounded-2xl border-white/5 flex items-center justify-between group hover:border-indigo-500/30 transition-all duration-300">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg"><i class="fa-brands fa-discord"></i></div>
+                        <div class="text-left">
+                            <span class="text-[10px] font-semibold text-neutral-500 block uppercase tracking-wider">Discord Handle</span>
+                            <span class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors">itsroyzex</span>
                         </div>
-                        <button type="submit" class="w-full py-3 bg-white text-black font-semibold rounded-xl hover:bg-accentBlue hover:text-white transition-all text-xs uppercase tracking-wider">Send Message</button>
-                    </form>
+                    </div>
+                    <i class="fa-regular fa-copy text-xs text-neutral-600 group-hover:text-indigo-400 transition-colors"></i>
                 </div>
             </div>
         </section>
@@ -273,18 +273,77 @@
     </main>
 
     <script>
-        // Track mouse movement for subtle glow positioning 
+        // Track mouse movement for ambient backing lights grid coordinate maps
         const mouseGlow = document.getElementById('mouse-glow');
         window.addEventListener('mousemove', (e) => {
             mouseGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
         });
 
-        // Form submission listener
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thanks for reaching out! I will get back to you as soon as possible.');
-            e.target.reset();
-        });
+        // --- THREE.JS INTERACTIVE 3D WEBGL ENGINE WIREFRAME GLOBE ---
+        const container = document.getElementById('three-canvas-container');
+        if (container) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+            
+            // Alpha: true ensures background transparency integrates nicely with the dark aesthetic
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Constructing a high-fidelity structural geodesic mesh globe
+            const geometry = new THREE.IcosahedronGeometry(1.6, 2);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x3B82F6,
+                wireframe: true,
+                shininess: 80,
+                flatShading: true
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Lighting systems configuration
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+            scene.add(ambientLight);
+            
+            const pointLight = new THREE.PointLight(0x3B82F6, 1.8, 45);
+            pointLight.position.set(4, 4, 4);
+            scene.add(pointLight);
+
+            camera.position.z = 3.2;
+
+            // Track coordinate targets for fluid interpolation shifts
+            let mouseX = 0;
+            let mouseY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+            });
+
+            // Continuous execution cycle frame render loop
+            const renderLoop = () => {
+                requestAnimationFrame(renderLoop);
+
+                // Idle rotational velocity calculations
+                mesh.rotation.y += 0.0025;
+                mesh.rotation.x += 0.0008;
+
+                // Physics weight mix adjustment calculation tracking
+                mesh.rotation.y += (mouseX - mesh.rotation.y) * 0.08;
+                mesh.rotation.x += (mouseY - mesh.rotation.x) * 0.08;
+
+                renderer.render(scene, camera);
+            };
+            renderLoop();
+
+            // Screen space configuration listeners
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        }
     </script>
 </body>
 </html>
