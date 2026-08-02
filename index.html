@@ -3,309 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryan | Frontend Developer</title>
-    <meta name="description" content="Portfolio of Ryan, a junior frontend developer focused on building clean, interactive web layouts.">
+    <title>Ryan — Frontend Developer</title>
+    <meta name="description" content="Portfolio of Ryan, a frontend developer crafting modern, interactive web layouts.">
     
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        bgDark: '#050505',
-                        accentBlue: '#3B82F6',
-                        glassBg: 'rgba(10, 10, 10, 0.5)',
-                        glassBorder: 'rgba(255, 255, 255, 0.08)',
+                        obsidian: '#08080a',
+                        cardBg: '#111116',
+                        accentEmerald: '#10b981',
+                        accentCyan: '#06b6d4',
+                        accentViolet: '#8b5cf6',
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
                 }
             }
         }
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- FontAwesome & Three.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         body {
-            background-color: #050505;
-            color: #ffffff;
+            background-color: #08080a;
+            color: #e2e8f0;
             overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        .noise-bg {
+
+        /* Ambient subtle grain background */
+        .noise-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            content: "";
-            opacity: 0.02;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.025;
             pointer-events: none;
-            z-index: 9999;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
+
+        /* Glassmorphism Cards */
         .glass-card {
-            background: rgba(10, 10, 10, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(17, 17, 22, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
+
+        .glass-card:hover {
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        /* Modern Text Gradient */
         .gradient-text {
-            background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #10b981 70%, #06b6d4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Glowing Border Highlight */
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(90deg, rgba(16,185,129,0.3), rgba(6,182,212,0.3));
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+
+        /* Scrollbar styling */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+        ::-webkit-scrollbar-track { background: #08080a; }
+        ::-webkit-scrollbar-thumb { background: #1e1e24; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-emerald-500/20 selection:text-emerald-300">
 
-    <div class="noise-bg"></div>
-    <div id="mouse-glow" class="fixed top-0 left-0 w-[350px] h-[350px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out z-0"></div>
+    <div class="noise-overlay"></div>
 
-    <header id="navbar" class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12">
-        <nav class="max-w-5xl mx-auto flex justify-between items-center glass-card px-6 py-3 rounded-full border-white/5 shadow-xl">
-            <a href="#home" class="text-lg font-bold tracking-tighter hover:text-accentBlue transition-colors">RYAN.</a>
+    <!-- Mouse Tracking Dynamic Ambient Glow -->
+    <div id="mouse-glow" class="fixed top-0 left-0 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 ease-out z-0"></div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full z-50 py-5 px-6 md:px-12">
+        <nav class="max-w-5xl mx-auto flex justify-between items-center glass-card px-6 py-3 rounded-2xl shadow-2xl border-white/10">
+            <a href="#home" class="font-mono font-bold text-sm tracking-wider text-white hover:text-emerald-400 transition-colors flex items-center gap-2">
+                <span class="text-emerald-400">&lt;</span>RYAN<span class="text-emerald-400">/&gt;</span>
+            </a>
             
-            <div class="hidden md:flex gap-6 items-center text-xs font-medium text-neutral-400">
-                <a href="#home" class="hover:text-white transition-colors">Home</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#skills" class="hover:text-white transition-colors">Skills</a>
-                <a href="#focus" class="hover:text-white transition-colors">Development Focus</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+            <div class="hidden md:flex gap-8 items-center text-xs font-medium text-slate-400">
+                <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-emerald-400 transition-colors">Toolkit</a>
+                <a href="#focus" class="hover:text-emerald-400 transition-colors">Focus Area</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">Contact</a>
             </div>
 
             <div>
-                <a href="mailto:flamzyxd12@Gmail.com" class="px-4 py-2 bg-white text-black font-medium text-xs rounded-full hover:bg-transparent hover:text-white border border-white transition-all duration-300">Let's Connect</a>
+                <a href="mailto:flamzyxd12@gmail.com" class="px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-mono text-xs rounded-xl hover:bg-emerald-500 hover:text-black font-semibold transition-all duration-300 shadow-lg shadow-emerald-500/10">
+                    get_in_touch()
+                </a>
             </div>
         </nav>
     </header>
 
-    <main class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12">
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 md:px-12">
 
-        <section id="home" class="min-h-screen grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-24 relative">
-            <div class="md:col-span-7 space-y-6 text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 glass-card rounded-full text-xs font-medium text-blue-400 border-white/5">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> Building and learning every day
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-28 pb-12">
+            <div class="md:col-span-7 space-y-6">
+                
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 glass-card rounded-full text-xs font-mono text-emerald-400 border-emerald-500/20">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Available for junior / entry frontend roles
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-none text-white">
-                    Hi, I'm <span class="gradient-text">Ryan</span>. <br>
-                    <span class="text-neutral-400 text-2xl md:text-4xl font-medium">I build web interfaces.</span>
+
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white">
+                    Crafting <span class="gradient-text">responsive</span> & thoughtful user interfaces.
                 </h1>
-                <p class="text-base text-neutral-400 font-light leading-relaxed max-w-xl">
-                    I am a frontend developer with six months of dedicated hands-on experience coding layouts and interactive features. I focus on writing clean HTML, styling with Tailwind CSS, and bringing elements to life with JavaScript.
+
+                <p class="text-sm md:text-base text-slate-400 font-normal leading-relaxed max-w-xl">
+                    Hey, I'm <strong class="text-slate-200">Ryan</strong>. I focus on turning modern visual concepts into clean, performance-minded code with standard HTML, Tailwind CSS, JavaScript, and React.
                 </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#focus" class="px-6 py-3 bg-accentBlue text-white text-sm font-medium rounded-full hover:bg-blue-600 transition-all shadow-md shadow-blue-500/10">See What I Focus On</a>
-                    <a href="#contact" class="px-6 py-3 glass-card text-white text-sm font-medium rounded-full hover:bg-white/5 transition-all border-white/10">Get in Touch</a>
+
+                <!-- CTA Actions -->
+                <div class="flex flex-wrap items-center gap-4 pt-2 font-mono text-xs">
+                    <a href="#focus" class="px-6 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-emerald-400 transition-all shadow-lg shadow-white/5 flex items-center gap-2">
+                        <span>Explore Work Focus</span>
+                        <i class="fa-solid fa-arrow-down text-xs"></i>
+                    </a>
+                    <a href="mailto:flamzyxd12@gmail.com" class="px-6 py-3.5 glass-card text-slate-300 font-medium rounded-xl hover:text-white hover:border-white/20 transition-all">
+                        Send Direct Email
+                    </a>
+                </div>
+
+                <!-- Quick Tech Pill Strip -->
+                <div class="pt-6 border-t border-white/5 flex items-center gap-4 text-xs font-mono text-slate-500">
+                    <span>Core Stack:</span>
+                    <div class="flex gap-3 text-slate-300">
+                        <span class="hover:text-emerald-400 transition-colors">HTML5</span>
+                        <span>/</span>
+                        <span class="hover:text-emerald-400 transition-colors">Tailwind</span>
+                        <span>/</span>
+                        <span class="hover:text-emerald-400 transition-colors">JavaScript</span>
+                        <span>/</span>
+                        <span class="hover:text-emerald-400 transition-colors">React</span>
+                    </div>
                 </div>
             </div>
-            
-            <div class="md:col-span-5 h-[300px] md:h-[400px] w-full relative">
+
+            <!-- 3D Interactive Canvas -->
+            <div class="md:col-span-5 h-[320px] md:h-[420px] w-full relative glass-card rounded-3xl border-white/10 overflow-hidden flex items-center justify-center">
                 <div id="three-canvas-container" class="w-full h-full absolute inset-0 cursor-grab active:cursor-grabbing"></div>
-            </div>
-        </section>
-
-        <section id="about" class="py-24 border-t border-white/5">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                <div class="md:col-span-4">
-                    <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue mb-2">My Story</h2>
-                    <h3 class="text-2xl font-bold tracking-tight text-white">The Reality</h3>
-                </div>
-                <div class="md:col-span-8 space-y-4 text-neutral-400 font-light text-sm leading-relaxed">
-                    <p>
-                        I started diving deep into web development six months ago. Instead of trying to learn everything at once, I chose to focus intensely on the fundamentals: building accessible structures, getting layouts completely responsive, and organizing my files properly.
-                    </p>
-                    <p>
-                        While I am primarily focused on frontend UI and interactive components, I've also tinkered with cloud solutions, specifically using <span class="text-white font-medium">Firebase</span> to manage simple backend tasks like real-time databases and basic user actions. I prefer being great at the frontend over stretching myself too thin.
-                    </p>
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center pointer-events-none px-2">
+                    <span class="font-mono text-[10px] text-slate-500 uppercase tracking-widest"><i class="fa-solid fa-cube me-1"></i> Interactive Mesh</span>
+                    <span class="font-mono text-[10px] text-emerald-400/70">Drag to rotate</span>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="py-24 border-t border-white/5">
+        <!-- About Section -->
+        <section id="about" class="py-20 border-t border-white/5">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 space-y-2">
+                    <span class="font-mono text-xs font-semibold text-emerald-400 uppercase tracking-wider">// Background</span>
+                    <h2 class="text-2xl font-bold tracking-tight text-white">Focus over hype</h2>
+                </div>
+                <div class="md:col-span-8 space-y-5 text-slate-400 text-sm leading-relaxed">
+                    <p>
+                        I spent the past six months immersing myself into front-end engineering fundamentals. Rather than skimming through dozens of frameworks, my focus has been building solid layouts, mastering CSS grid & flexbox, and writing maintainable code structures.
+                    </p>
+                    <p>
+                        Beyond core UI markup, I experiment with cloud platforms like <span class="text-emerald-300 font-medium">Firebase</span> for light backend workflows (authentication and real-time database connections), giving me a balanced understanding of how frontend applications interface with modern Web APIs.
+                    </p>
+
+                    <!-- Key Stats Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 font-mono">
+                        <div class="p-4 rounded-xl glass-card border-white/5">
+                            <span class="text-2xl font-bold text-white block">6+</span>
+                            <span class="text-[11px] text-slate-500">Months Coding</span>
+                        </div>
+                        <div class="p-4 rounded-xl glass-card border-white/5">
+                            <span class="text-2xl font-bold text-emerald-400 block">100%</span>
+                            <span class="text-[11px] text-slate-500">Responsive Focus</span>
+                        </div>
+                        <div class="p-4 rounded-xl glass-card border-white/5 col-span-2 sm:col-span-1">
+                            <span class="text-2xl font-bold text-cyan-400 block">Clean</span>
+                            <span class="text-[11px] text-slate-500">Semantic Markup</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Section -->
+        <section id="skills" class="py-20 border-t border-white/5">
             <div class="mb-12">
-                <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue mb-2">My Toolkit</h2>
-                <h3 class="text-2xl font-bold tracking-tight">Technologies I work with</h3>
+                <span class="font-mono text-xs font-semibold text-emerald-400 uppercase tracking-wider">// Technology</span>
+                <h2 class="text-2xl font-bold tracking-tight text-white mt-1">Tools & Competencies</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-6 rounded-2xl border-white/5 space-y-4">
-                    <div class="text-accentBlue text-lg"><i class="fa-solid fa-code"></i></div>
-                    <h4 class="font-bold text-base">Core Frontend</h4>
-                    <p class="text-xs text-neutral-400 font-light">The foundational building blocks of everything I write.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">HTML5</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">CSS3</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">JavaScript</span>
+                <!-- Card 1 -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 glow-border">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-white">Frontend Core</h3>
+                        <p class="text-xs text-slate-400 mt-1">Foundational semantic code and interactivity.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">HTML5</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">CSS3 / ES6</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">JavaScript</span>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl border-white/5 space-y-4">
-                    <div class="text-indigo-400 text-lg"><i class="fa-solid fa-layer-group"></i></div>
-                    <h4 class="font-bold text-base">Frameworks & Styling</h4>
-                    <p class="text-xs text-neutral-400 font-light">Tools I use to create fast, scalable, modular user interfaces.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">React.js</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">Tailwind CSS</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">Bootstrap</span>
+                <!-- Card 2 -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 glow-border">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-white">Frameworks & Styling</h3>
+                        <p class="text-xs text-slate-400 mt-1">Utility-first styling and component architecture.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">Tailwind CSS</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">React.js</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">Bootstrap</span>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl border-white/5 space-y-4">
-                    <div class="text-amber-500 text-lg"><i class="fa-solid fa-cloud"></i></div>
-                    <h4 class="font-bold text-base">Backend & Systems</h4>
-                    <p class="text-xs text-neutral-400 font-light">The tools I use for handling cloud hosting and deployment pipelines.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">Firebase (Auth/DB)</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">Git / GitHub</span>
-                        <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-xs text-neutral-300">Vercel</span>
+                <!-- Card 3 -->
+                <div class="glass-card p-6 rounded-2xl space-y-4 glow-border">
+                    <div class="w-10 h-10 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-white">Tooling & Cloud</h3>
+                        <p class="text-xs text-slate-400 mt-1">Version control, deployment, and cloud functions.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-[11px]">
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">Git / GitHub</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">Firebase</span>
+                        <span class="px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5">Vercel</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="focus" class="py-24 border-t border-white/5">
+        <!-- Development Focus Section -->
+        <section id="focus" class="py-20 border-t border-white/5">
             <div class="mb-12">
-                <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue mb-2">Development Focus</h2>
-                <h3 class="text-2xl font-bold tracking-tight">What I Spend My Time Testing</h3>
+                <span class="font-mono text-xs font-semibold text-emerald-400 uppercase tracking-wider">// Specialization</span>
+                <h2 class="text-2xl font-bold tracking-tight text-white mt-1">What I Spend Time Building</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-8 rounded-2xl border-white/5 space-y-4">
-                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-accentBlue flex items-center justify-center text-base"><i class="fa-solid fa-mobile-screen"></i></div>
-                    <h4 class="text-lg font-bold text-white tracking-tight">Responsive UI Layouts</h4>
-                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
-                        I focus on building fluid layouts from scratch using Tailwind flexboxes and grid structures. My goal is ensuring designs look completely intentional on screens ranging from smartphones to large desktop views without falling apart.
+                <div class="glass-card p-8 rounded-2xl space-y-4 border-white/5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-base">
+                        <i class="fa-solid fa-display"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Adaptive Responsive Design</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed font-normal">
+                        Creating layouts that fluidly adjust to any screen size—from ultrawide desktop monitors down to compact mobile displays. I build with standard CSS grid and flexbox logic for reliable responsiveness.
                     </p>
                 </div>
 
-                <div class="glass-card p-8 rounded-2xl border-white/5 space-y-4">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-base"><i class="fa-solid fa-database"></i></div>
-                    <h4 class="text-lg font-bold text-white tracking-tight">Data & Logic Integration</h4>
-                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
-                        I experiment with setting up interactive elements via standard JavaScript DOM manipulation. I've also implemented basic database actions using Firebase to safely verify input entries and test real-time environmental keys.
+                <div class="glass-card p-8 rounded-2xl space-y-4 border-white/5">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">DOM Interactivity & Logic</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed font-normal">
+                        Building functional web interfaces, managing dynamic state, and integrating third-party APIs. I focus on writing clear, readable JS routines that enhance user experience without bloat.
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-24 border-t border-white/5 max-w-3xl mx-auto text-center space-y-8">
-            <div class="space-y-2">
-                <h2 class="text-xs uppercase font-semibold tracking-widest text-accentBlue">Get In Touch</h2>
-                <h3 class="text-3xl font-bold tracking-tight text-white">Let's talk about opportunities.</h3>
-                <p class="text-neutral-400 font-light text-sm max-w-xl mx-auto leading-relaxed">
-                    I am open to entry-level frontend roles, internships, or web interface projects. Drop me a line directly on either of my active channels below.
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 border-t border-white/5 max-w-2xl mx-auto text-center space-y-8">
+            <div class="space-y-3">
+                <span class="font-mono text-xs font-semibold text-emerald-400 uppercase tracking-wider">// Get In Touch</span>
+                <h2 class="text-3xl font-extrabold tracking-tight text-white">Let's build something together.</h2>
+                <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto leading-relaxed">
+                    I am actively seeking junior frontend engineering roles, internship opportunities, and collaborative web projects.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto">
-                <a href="mailto:flamzyxd12@Gmail.com" class="glass-card p-5 rounded-2xl border-white/5 flex items-center justify-between group hover:border-blue-500/30 transition-all duration-300">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-accentBlue flex items-center justify-center text-lg"><i class="fa-solid fa-envelope"></i></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Email Contact -->
+                <a href="mailto:flamzyxd12@gmail.com" class="glass-card p-5 rounded-2xl flex items-center justify-between group hover:border-emerald-500/40 transition-all">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-base">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
                         <div class="text-left">
-                            <span class="text-[10px] font-semibold text-neutral-500 block uppercase tracking-wider">Email Me</span>
-                            <span class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors">flamzyxd12@Gmail.com</span>
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">Email Me</span>
+                            <span class="text-xs font-semibold text-slate-200 group-hover:text-emerald-400 transition-colors">flamzyxd12@gmail.com</span>
                         </div>
                     </div>
-                    <i class="fa-solid fa-arrow-right text-xs text-neutral-600 group-hover:text-accentBlue group-hover:translate-x-1 transition-all"></i>
+                    <i class="fa-solid fa-arrow-right text-xs text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all"></i>
                 </a>
 
-                <div class="glass-card p-5 rounded-2xl border-white/5 flex items-center justify-between group hover:border-indigo-500/30 transition-all duration-300">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg"><i class="fa-brands fa-discord"></i></div>
+                <!-- Discord Contact (Interactive Copy Button) -->
+                <div id="discord-card" onclick="copyDiscordHandle()" class="glass-card p-5 rounded-2xl flex items-center justify-between cursor-pointer group hover:border-cyan-500/40 transition-all relative">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-base">
+                            <i class="fa-brands fa-discord"></i>
+                        </div>
                         <div class="text-left">
-                            <span class="text-[10px] font-semibold text-neutral-500 block uppercase tracking-wider">Discord Handle</span>
-                            <span class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors">itsroyzex</span>
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">Discord</span>
+                            <span id="discord-text" class="text-xs font-semibold text-slate-200 group-hover:text-cyan-400 transition-colors">itsroyzex</span>
                         </div>
                     </div>
-                    <i class="fa-regular fa-copy text-xs text-neutral-600 group-hover:text-indigo-400 transition-colors"></i>
+                    <i id="discord-icon" class="fa-regular fa-copy text-xs text-slate-600 group-hover:text-cyan-400 transition-colors"></i>
+                    
+                    <!-- Toast Feedback -->
+                    <span id="copy-toast" class="absolute -top-8 right-2 bg-emerald-500 text-black font-mono text-[10px] px-2 py-0.5 rounded opacity-0 transition-opacity pointer-events-none font-bold">Copied!</span>
                 </div>
             </div>
         </section>
 
-        <footer class="py-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-neutral-500">
-            <p>&copy; 2026 Ryan.</p>
-            <div class="flex gap-4">
-                <a href="#home" class="hover:text-white transition-colors">Top</a>
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#focus" class="hover:text-white transition-colors">Focus</a>
+        <!-- Footer -->
+        <footer class="py-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
+            <p>&copy; 2026 Ryan. Built with Tailwind & Three.js</p>
+            <div class="flex gap-6">
+                <a href="#home" class="hover:text-emerald-400 transition-colors">Top</a>
+                <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-emerald-400 transition-colors">Toolkit</a>
             </div>
         </footer>
 
     </main>
 
+    <!-- JavaScript Interactivity -->
     <script>
-        // Track mouse movement for ambient backing lights grid coordinate maps
+        // Smooth Cursor Follow Light Glow
         const mouseGlow = document.getElementById('mouse-glow');
         window.addEventListener('mousemove', (e) => {
             mouseGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
         });
 
-        // --- THREE.JS INTERACTIVE 3D WEBGL ENGINE WIREFRAME GLOBE ---
+        // Copy Discord Handle to Clipboard
+        function copyDiscordHandle() {
+            const handle = "itsroyzex";
+            navigator.clipboard.writeText(handle);
+            
+            const toast = document.getElementById('copy-toast');
+            const icon = document.getElementById('discord-icon');
+
+            toast.classList.remove('opacity-0');
+            icon.className = "fa-solid fa-check text-xs text-emerald-400";
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                icon.className = "fa-regular fa-copy text-xs text-slate-600 group-hover:text-cyan-400";
+            }, 2000);
+        }
+
+        // --- THREE.JS INTERACTIVE 3D TORUS KNOT MESH ---
         const container = document.getElementById('three-canvas-container');
         if (container) {
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
             
-            // Alpha: true ensures background transparency integrates nicely with the dark aesthetic
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
 
-            // Constructing a high-fidelity structural geodesic mesh globe
-            const geometry = new THREE.IcosahedronGeometry(1.6, 2);
-            const material = new THREE.MeshPhongMaterial({
-                color: 0x3B82F6,
+            // Wireframe TorusKnot geometry
+            const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x10b981,
                 wireframe: true,
-                shininess: 80,
-                flatShading: true
+                roughness: 0.3,
+                metalness: 0.8
             });
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
-            // Lighting systems configuration
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(ambientLight);
             
-            const pointLight = new THREE.PointLight(0x3B82F6, 1.8, 45);
-            pointLight.position.set(4, 4, 4);
+            const pointLight = new THREE.PointLight(0x06b6d4, 2, 50);
+            pointLight.position.set(5, 5, 5);
             scene.add(pointLight);
 
-            camera.position.z = 3.2;
+            camera.position.z = 3.8;
 
-            // Track coordinate targets for fluid interpolation shifts
+            // Interactive mouse rotation tracking
             let mouseX = 0;
             let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
 
-            window.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) - 0.5;
-                mouseY = (e.clientY / window.innerHeight) - 0.5;
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                mouseX = ((e.clientX - rect.left) / container.clientWidth) - 0.5;
+                mouseY = ((e.clientY - rect.top) / container.clientHeight) - 0.5;
             });
 
-            // Continuous execution cycle frame render loop
+            // Render loop with lerp movement
             const renderLoop = () => {
                 requestAnimationFrame(renderLoop);
 
-                // Idle rotational velocity calculations
-                mesh.rotation.y += 0.0025;
-                mesh.rotation.x += 0.0008;
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
 
-                // Physics weight mix adjustment calculation tracking
-                mesh.rotation.y += (mouseX - mesh.rotation.y) * 0.08;
-                mesh.rotation.x += (mouseY - mesh.rotation.x) * 0.08;
+                mesh.rotation.y += 0.005;
+                mesh.rotation.x += 0.003;
+
+                mesh.rotation.y += targetX * 0.05;
+                mesh.rotation.x += targetY * 0.05;
 
                 renderer.render(scene, camera);
             };
             renderLoop();
 
-            // Screen space configuration listeners
+            // Resize handler
             window.addEventListener('resize', () => {
                 camera.aspect = container.clientWidth / container.clientHeight;
                 camera.updateProjectionMatrix();
