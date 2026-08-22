@@ -1,1174 +1,230 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Ryan | Frontend Developer</title>
-    <meta name="description" content="Ryan's frontend development portfolio and selected web projects.">
-
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: "#09090b",
-                        card: "#111114",
-                        green: "#10b981",
-                        cyan: "#06b6d4"
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                        mono: ["Fira Code", "monospace"]
-                    }
-                }
-            }
-        };
-    </script>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
-
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan — Frontend Developer</title>
+  <meta name="description" content="Frontend developer portfolio. HTML, CSS, JavaScript, React, Tailwind.">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#0c0c0e",
+            card: "#141416",
+            accent: "#22c55e"
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            background: #09090b;
-            color: #e4e4e7;
-            font-family: "Inter", sans-serif;
-            overflow-x: hidden;
-        }
-
-        ::selection {
-            background: rgba(16, 185, 129, 0.25);
-            color: #ffffff;
-        }
-
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #09090b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #10b981;
-        }
-
-        .noise {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            pointer-events: none;
-            opacity: 0.025;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-        }
-
-        .glass {
-            background: rgba(17, 17, 20, 0.72);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            transition: border-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .glass:hover {
-            border-color: rgba(255, 255, 255, 0.13);
-        }
-
-        .hero-bg {
-            background:
-                radial-gradient(
-                    circle at 15% 30%,
-                    rgba(16, 185, 129, 0.08),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 85% 40%,
-                    rgba(6, 182, 212, 0.05),
-                    transparent 25%
-                );
-        }
-
-        .project-grid {
-            background-image:
-                linear-gradient(
-                    rgba(255, 255, 255, 0.035) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255, 255, 255, 0.035) 1px,
-                    transparent 1px
-                );
-
-            background-size: 36px 36px;
-        }
-
-        #mouse-glow {
-            position: fixed;
-            width: 360px;
-            height: 360px;
-            border-radius: 50%;
-            background: rgba(16, 185, 129, 0.05);
-            filter: blur(70px);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-
-        .project-card {
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(16, 185, 129, 0.25);
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.25);
-        }
-
-        .preview-window {
-            transition: transform 0.4s ease;
-        }
-
-        .project-card:hover .preview-window {
-            transform: translateY(-5px);
-        }
-    </style>
+      }
+    }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      background: #0c0c0e;
+      color: #d4d4d8;
+    }
+    ::selection {
+      background: #22c55e33;
+    }
+    .card {
+      background: #141416;
+      border: 1px solid #27272a;
+    }
+    .card:hover {
+      border-color: #3f3f46;
+    }
+  </style>
 </head>
-
-<body class="antialiased">
-
-    <div class="noise"></div>
-    <div id="mouse-glow"></div>
-
-    <!-- NAVIGATION -->
-    <header class="fixed top-0 left-0 w-full z-50 px-4 md:px-8 py-4">
-
-        <nav class="glass max-w-5xl mx-auto rounded-xl px-5 py-3 flex items-center justify-between">
-
-            <a
-                href="#home"
-                class="font-mono text-sm font-semibold text-white"
-            >
-                <span class="text-green">&lt;</span>ryan<span class="text-green">/&gt;</span>
-            </a>
-
-            <div class="hidden md:flex items-center gap-6 text-xs text-zinc-500 font-medium">
-
-                <a href="#about" class="hover:text-white transition">
-                    About
-                </a>
-
-                <a href="#skills" class="hover:text-white transition">
-                    Skills
-                </a>
-
-                <a href="#projects" class="hover:text-white transition">
-                    Projects
-                </a>
-
-                <a href="#contact" class="hover:text-white transition">
-                    Contact
-                </a>
-
-            </div>
-
-            <a
-                href="mailto:flamzyxd12@gmail.com"
-                class="font-mono text-xs font-semibold text-green border border-green/20 bg-green/10 px-4 py-2 rounded-lg hover:bg-green hover:text-black transition"
-            >
-                get_in_touch()
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <main class="relative z-10 max-w-5xl mx-auto px-5 md:px-10">
-
-
-        <!-- HERO -->
-        <section
-            id="home"
-            class="hero-bg min-h-screen grid md:grid-cols-12 gap-8 items-center pt-28 pb-16"
-        >
-
-            <div class="md:col-span-7">
-
-                <div class="inline-flex items-center gap-2 glass rounded-full px-3 py-1.5 mb-6">
-
-                    <span class="w-2 h-2 rounded-full bg-green animate-pulse"></span>
-
-                    <span class="font-mono text-[11px] text-zinc-400">
-                        Available for freelance work
-                    </span>
-
-                </div>
-
-
-                <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
-
-                    I build websites
-
-                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-white via-green to-cyan">
-                        for real projects.
-                    </span>
-
-                </h1>
-
-
-                <p class="mt-6 max-w-xl text-sm md:text-base leading-7 text-zinc-400">
-
-                    I'm Ryan, a frontend developer who enjoys turning ideas into
-                    working websites. I mainly use HTML, CSS, JavaScript,
-                    Tailwind CSS, React, and Firebase.
-
-                </p>
-
-
-                <div class="flex flex-wrap gap-3 mt-8">
-
-                    <a
-                        href="#projects"
-                        class="px-5 py-3 rounded-lg bg-white text-black text-xs font-mono font-semibold hover:bg-green transition"
-                    >
-                        See my work
-                    </a>
-
-                    <a
-                        href="#contact"
-                        class="px-5 py-3 rounded-lg glass text-zinc-300 text-xs font-mono hover:text-white transition"
-                    >
-                        Contact me
-                    </a>
-
-                </div>
-
-
-                <div class="mt-10 pt-5 border-t border-white/5 flex flex-wrap items-center gap-x-4 gap-y-2">
-
-                    <span class="font-mono text-[10px] uppercase text-zinc-600">
-                        Main stack
-                    </span>
-
-                    <span class="text-xs text-zinc-400">
-                        HTML
-                    </span>
-
-                    <span class="text-zinc-700">•</span>
-
-                    <span class="text-xs text-zinc-400">
-                        CSS
-                    </span>
-
-                    <span class="text-zinc-700">•</span>
-
-                    <span class="text-xs text-zinc-400">
-                        JavaScript
-                    </span>
-
-                    <span class="text-zinc-700">•</span>
-
-                    <span class="text-xs text-zinc-400">
-                        React
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- THREE.JS -->
-            <div class="md:col-span-5 h-[330px] md:h-[410px] glass rounded-2xl overflow-hidden relative">
-
-                <div
-                    id="three-container"
-                    class="absolute inset-0 cursor-grab active:cursor-grabbing"
-                ></div>
-
-                <div class="absolute left-4 right-4 bottom-4 flex justify-between pointer-events-none">
-
-                    <span class="font-mono text-[10px] text-zinc-600">
-                        interactive object
-                    </span>
-
-                    <span class="font-mono text-[10px] text-green/70">
-                        move your mouse
-                    </span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ABOUT -->
-        <section id="about" class="py-20 border-t border-white/5">
-
-            <div class="grid md:grid-cols-12 gap-8">
-
-                <div class="md:col-span-4">
-
-                    <span class="font-mono text-[11px] text-green uppercase">
-                        01 / About
-                    </span>
-
-                    <h2 class="text-2xl font-bold text-white mt-2">
-                        About me
-                    </h2>
-
-                </div>
-
-
-                <div class="md:col-span-8 text-sm leading-7 text-zinc-400 space-y-4">
-
-                    <p>
-                        I got into web development because I wanted to understand
-                        how websites actually work. Since then, I've spent a lot
-                        of time building projects, testing different ideas,
-                        fixing bugs, and learning from the things that don't work.
-                    </p>
-
-                    <p>
-                        Most of what I do is frontend development. I also use
-                        Firebase when a project needs authentication or database
-                        features. I learn best by actually building things, so
-                        that's what I spend most of my time doing.
-                    </p>
-
-
-                    <div class="grid grid-cols-3 gap-3 pt-5">
-
-                        <div class="glass rounded-lg p-4">
-
-                            <span class="block text-lg font-bold text-white">
-                                6+
-                            </span>
-
-                            <span class="block mt-1 text-[10px] font-mono text-zinc-600">
-                                months learning
-                            </span>
-
-                        </div>
-
-
-                        <div class="glass rounded-lg p-4">
-
-                            <span class="block text-lg font-bold text-green">
-                                Live
-                            </span>
-
-                            <span class="block mt-1 text-[10px] font-mono text-zinc-600">
-                                demo project
-                            </span>
-
-                        </div>
-
-
-                        <div class="glass rounded-lg p-4">
-
-                            <span class="block text-lg font-bold text-cyan">
-                                Web
-                            </span>
-
-                            <span class="block mt-1 text-[10px] font-mono text-zinc-600">
-                                frontend focused
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- SKILLS -->
-        <section id="skills" class="py-20 border-t border-white/5">
-
-            <div class="mb-10">
-
-                <span class="font-mono text-[11px] text-green uppercase">
-                    02 / Skills
-                </span>
-
-                <h2 class="text-2xl font-bold text-white mt-2">
-                    What I use
-                </h2>
-
-            </div>
-
-
-            <div class="grid md:grid-cols-3 gap-5">
-
-
-                <!-- FRONTEND -->
-                <div class="glass rounded-xl p-6">
-
-                    <div class="w-9 h-9 rounded-lg bg-green/10 flex items-center justify-center text-green mb-5">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
-
-                    <h3 class="text-base font-semibold text-white">
-                        Frontend
-                    </h3>
-
-                    <p class="text-xs leading-6 text-zinc-500 mt-2">
-                        The main technologies I use for building websites and
-                        interactive pages.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mt-5">
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            HTML5
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            CSS3
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            JavaScript
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FRAMEWORKS -->
-                <div class="glass rounded-xl p-6">
-
-                    <div class="w-9 h-9 rounded-lg bg-cyan/10 flex items-center justify-center text-cyan mb-5">
-                        <i class="fa-solid fa-layer-group"></i>
-                    </div>
-
-                    <h3 class="text-base font-semibold text-white">
-                        Frameworks
-                    </h3>
-
-                    <p class="text-xs leading-6 text-zinc-500 mt-2">
-                        Tools that help me build larger interfaces without
-                        having to do everything from scratch.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mt-5">
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            React
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            Tailwind CSS
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            Bootstrap
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- TOOLS -->
-                <div class="glass rounded-xl p-6">
-
-                    <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-5">
-                        <i class="fa-solid fa-wrench"></i>
-                    </div>
-
-                    <h3 class="text-base font-semibold text-white">
-                        Tools
-                    </h3>
-
-                    <p class="text-xs leading-6 text-zinc-500 mt-2">
-                        Tools I use for version control, backend features,
-                        and deploying websites.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mt-5">
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            GitHub
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            Firebase
-                        </span>
-
-                        <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-mono text-zinc-400">
-                            Vercel
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECTS -->
-        <section id="projects" class="py-20 border-t border-white/5">
-
-            <div class="mb-10">
-
-                <span class="font-mono text-[11px] text-green uppercase">
-                    03 / Projects
-                </span>
-
-                <h2 class="text-2xl font-bold text-white mt-2">
-                    Recent work
-                </h2>
-
-                <p class="text-sm text-zinc-500 mt-3 max-w-xl">
-                    Here's one of the websites I've built recently.
-                </p>
-
-            </div>
-
-
-            <!-- APEX MOTORS -->
-            <article class="project-card glass rounded-2xl overflow-hidden">
-
-                <!-- PROJECT PREVIEW -->
-                <div class="project-grid relative h-64 md:h-80 flex items-center justify-center overflow-hidden">
-
-                    <div class="absolute inset-0 bg-gradient-to-br from-green/10 via-transparent to-cyan/10"></div>
-
-
-                    <!-- Browser -->
-                    <div class="preview-window relative w-[84%] max-w-2xl rounded-xl border border-white/10 bg-[#0d0d10] shadow-2xl overflow-hidden">
-
-                        <!-- Browser bar -->
-                        <div class="h-8 border-b border-white/5 flex items-center px-3 gap-1.5">
-
-                            <span class="w-2 h-2 rounded-full bg-red-400/50"></span>
-                            <span class="w-2 h-2 rounded-full bg-yellow-400/50"></span>
-                            <span class="w-2 h-2 rounded-full bg-green/50"></span>
-
-                            <div class="ml-3 flex-1 h-4 rounded bg-white/5"></div>
-
-                        </div>
-
-
-                        <!-- Preview content -->
-                        <div class="p-5 md:p-7">
-
-                            <div class="flex items-center justify-between mb-6">
-
-                                <span class="font-mono text-xs font-semibold text-white">
-                                    APEX MOTORS
-                                </span>
-
-                                <span class="font-mono text-[9px] text-zinc-600">
-                                    INVENTORY
-                                </span>
-
-                            </div>
-
-
-                            <div class="grid grid-cols-3 gap-3">
-
-                                <div class="h-20 rounded-lg bg-white/5 border border-white/5"></div>
-
-                                <div class="h-20 rounded-lg bg-white/5 border border-white/5"></div>
-
-                                <div class="h-20 rounded-lg bg-white/5 border border-white/5"></div>
-
-                            </div>
-
-
-                            <div class="mt-5 w-32 h-2 rounded bg-green/30"></div>
-
-                            <div class="mt-2 w-52 h-2 rounded bg-white/5"></div>
-
-                        </div>
-
-                    </div>
-
-
-                    <span class="absolute bottom-4 left-5 font-mono text-[10px] text-zinc-600">
-                        live project
-                    </span>
-
-                </div>
-
-
-                <!-- PROJECT INFO -->
-                <div class="p-6 md:p-8">
-
-                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-7">
-
-                        <div class="max-w-2xl">
-
-
-                            <div class="flex flex-wrap gap-2 mb-4">
-
-                                <span class="px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-zinc-400">
-                                    HTML
-                                </span>
-
-                                <span class="px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-zinc-400">
-                                    CSS
-                                </span>
-
-                                <span class="px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-zinc-400">
-                                    JavaScript
-                                </span>
-
-                                <span class="px-2 py-1 rounded bg-white/5 text-[10px] font-mono text-zinc-400">
-                                    Responsive
-                                </span>
-
-                            </div>
-
-
-                            <h3 class="text-xl font-bold text-white">
-                                Apex Motors
-                            </h3>
-
-
-                            <p class="text-sm leading-7 text-zinc-400 mt-3">
-                                A car dealership website focused on making it
-                                easy to browse vehicles and look through their
-                                details. I built the interface, inventory
-                                section, navigation, responsive layouts,
-                                and frontend interactions.
-                            </p>
-
-                        </div>
-
-
-                        <a
-                            href="https://flamzyxd12-byte.github.io/ApexMotors/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="shrink-0 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-black text-xs font-mono font-semibold hover:bg-green transition"
-                        >
-                            View live site
-
-                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                        </a>
-
-                    </div>
-
-
-                    <!-- DETAILS -->
-                    <div class="grid sm:grid-cols-3 gap-5 mt-8 pt-6 border-t border-white/5">
-
-
-                        <div>
-
-                            <span class="block font-mono text-[9px] uppercase text-zinc-600">
-                                Type
-                            </span>
-
-                            <span class="block text-xs text-zinc-400 mt-1">
-                                Car dealership
-                            </span>
-
-                        </div>
-
-
-                        <div>
-
-                            <span class="block font-mono text-[9px] uppercase text-zinc-600">
-                                Built with
-                            </span>
-
-                            <span class="block text-xs text-zinc-400 mt-1">
-                                HTML, CSS, JavaScript
-                            </span>
-
-                        </div>
-
-
-                        <div>
-
-                            <span class="block font-mono text-[9px] uppercase text-zinc-600">
-                                Status
-                            </span>
-
-                            <span class="block text-xs text-green mt-1">
-                                Live
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- WHAT I DO -->
-        <section class="py-20 border-t border-white/5">
-
-            <div class="mb-10">
-
-                <span class="font-mono text-[11px] text-green uppercase">
-                    04 / Focus
-                </span>
-
-                <h2 class="text-2xl font-bold text-white mt-2">
-                    What I work on
-                </h2>
-
-            </div>
-
-
-            <div class="grid md:grid-cols-2 gap-5">
-
-
-                <div class="glass rounded-xl p-6">
-
-                    <div class="w-9 h-9 rounded-lg bg-green/10 flex items-center justify-center text-green">
-                        <i class="fa-solid fa-mobile-screen"></i>
-                    </div>
-
-                    <h3 class="text-lg font-semibold text-white mt-5">
-                        Responsive layouts
-                    </h3>
-
-                    <p class="text-xs leading-6 text-zinc-500 mt-2">
-                        I make sure websites work properly on phones,
-                        tablets, and desktop screens.
-                    </p>
-
-                </div>
-
-
-                <div class="glass rounded-xl p-6">
-
-                    <div class="w-9 h-9 rounded-lg bg-cyan/10 flex items-center justify-center text-cyan">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-
-                    <h3 class="text-lg font-semibold text-white mt-5">
-                        Interactive pages
-                    </h3>
-
-                    <p class="text-xs leading-6 text-zinc-500 mt-2">
-                        I use JavaScript and React when a website needs
-                        menus, filters, forms, animations, or other
-                        interactive features.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- CONTACT -->
-        <section
-            id="contact"
-            class="py-24 border-t border-white/5 max-w-2xl mx-auto"
-        >
-
-            <div class="text-center">
-
-                <span class="font-mono text-[11px] text-green uppercase">
-                    05 / Contact
-                </span>
-
-                <h2 class="text-3xl md:text-4xl font-bold text-white mt-3">
-                    Need a website?
-                </h2>
-
-                <p class="text-sm leading-6 text-zinc-500 mt-4">
-                    If you have a project in mind, send me the details
-                    and I'll get back to you.
-                </p>
-
-            </div>
-
-
-            <div class="grid sm:grid-cols-2 gap-4 mt-8">
-
-
-                <!-- EMAIL -->
-                <a
-                    href="mailto:flamzyxd12@gmail.com"
-                    class="glass rounded-xl p-4 flex items-center justify-between group"
-                >
-
-                    <div class="flex items-center gap-3">
-
-                        <div class="w-9 h-9 rounded-lg bg-green/10 flex items-center justify-center text-green">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-
-                        <div>
-
-                            <span class="block text-[9px] font-mono uppercase text-zinc-600">
-                                Email
-                            </span>
-
-                            <span class="block text-xs text-zinc-300 mt-1 group-hover:text-green transition">
-                                flamzyxd12@gmail.com
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <i class="fa-solid fa-arrow-right text-[10px] text-zinc-700 group-hover:text-green transition"></i>
-
-                </a>
-
-
-                <!-- DISCORD -->
-                <button
-                    onclick="copyDiscord()"
-                    class="glass rounded-xl p-4 flex items-center justify-between group text-left"
-                >
-
-                    <div class="flex items-center gap-3">
-
-                        <div class="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-                            <i class="fa-brands fa-discord"></i>
-                        </div>
-
-                        <div>
-
-                            <span class="block text-[9px] font-mono uppercase text-zinc-600">
-                                Discord
-                            </span>
-
-                            <span class="block text-xs text-zinc-300 mt-1 group-hover:text-indigo-400 transition">
-                                itsroyzex
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <i
-                        id="discord-icon"
-                        class="fa-regular fa-copy text-[10px] text-zinc-700 group-hover:text-indigo-400 transition"
-                    ></i>
-
-                </button>
-
-            </div>
-
-
-            <p
-                id="copy-message"
-                class="text-center text-[10px] font-mono text-green mt-4 opacity-0 transition-opacity"
-            >
-                Discord username copied
-            </p>
-
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer class="py-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-
-            <p class="text-[10px] font-mono text-zinc-600">
-                © 2026 Ryan
-            </p>
-
-            <div class="flex gap-5 text-[10px] font-mono text-zinc-600">
-
-                <a href="#home" class="hover:text-white transition">
-                    Top
-                </a>
-
-                <a href="#projects" class="hover:text-white transition">
-                    Projects
-                </a>
-
-                <a href="#contact" class="hover:text-white transition">
-                    Contact
-                </a>
-
-            </div>
-
-        </footer>
-
-    </main>
-
-
-    <script>
-
-        /* Mouse glow */
-
-        const mouseGlow = document.getElementById("mouse-glow");
-
-        window.addEventListener("mousemove", function(event) {
-
-            mouseGlow.style.left = event.clientX + "px";
-            mouseGlow.style.top = event.clientY + "px";
-
-        });
-
-
-        /* Discord copy */
-
-        async function copyDiscord() {
-
-            const username = "itsroyzex";
-            const message = document.getElementById("copy-message");
-            const icon = document.getElementById("discord-icon");
-
-            try {
-
-                await navigator.clipboard.writeText(username);
-
-                icon.className =
-                    "fa-solid fa-check text-[10px] text-green";
-
-                message.classList.remove("opacity-0");
-
-                setTimeout(function() {
-
-                    icon.className =
-                        "fa-regular fa-copy text-[10px] text-zinc-700";
-
-                    message.classList.add("opacity-0");
-
-                }, 1800);
-
-            } catch (error) {
-
-                message.textContent =
-                    "Copy failed. Discord: itsroyzex";
-
-                message.classList.remove("opacity-0");
-
-            }
-
-        }
-
-
-        /* Three.js */
-
-        const container =
-            document.getElementById("three-container");
-
-        if (container && typeof THREE !== "undefined") {
-
-            const scene = new THREE.Scene();
-
-            const camera = new THREE.PerspectiveCamera(
-                50,
-                container.clientWidth / container.clientHeight,
-                0.1,
-                100
-            );
-
-            const renderer =
-                new THREE.WebGLRenderer({
-                    antialias: true,
-                    alpha: true
-                });
-
-            renderer.setPixelRatio(
-                Math.min(window.devicePixelRatio, 2)
-            );
-
-            renderer.setSize(
-                container.clientWidth,
-                container.clientHeight
-            );
-
-            container.appendChild(renderer.domElement);
-
-
-            const geometry =
-                new THREE.TorusKnotGeometry(
-                    1,
-                    0.32,
-                    90,
-                    14
-                );
-
-
-            const material =
-                new THREE.MeshStandardMaterial({
-                    color: 0x10b981,
-                    wireframe: true,
-                    metalness: 0.7,
-                    roughness: 0.35
-                });
-
-
-            const mesh =
-                new THREE.Mesh(
-                    geometry,
-                    material
-                );
-
-            scene.add(mesh);
-
-
-            const ambient =
-                new THREE.AmbientLight(
-                    0xffffff,
-                    0.45
-                );
-
-            scene.add(ambient);
-
-
-            const light =
-                new THREE.PointLight(
-                    0x06b6d4,
-                    1.8,
-                    30
-                );
-
-            light.position.set(4, 3, 5);
-
-            scene.add(light);
-
-
-            camera.position.z = 3.5;
-
-
-            let targetX = 0;
-            let targetY = 0;
-
-
-            container.addEventListener(
-                "mousemove",
-                function(event) {
-
-                    const rect =
-                        container.getBoundingClientRect();
-
-                    targetX =
-                        ((event.clientX - rect.left) /
-                            rect.width - 0.5) * 0.8;
-
-                    targetY =
-                        ((event.clientY - rect.top) /
-                            rect.height - 0.5) * 0.8;
-
-                }
-            );
-
-
-            container.addEventListener(
-                "mouseleave",
-                function() {
-
-                    targetX = 0;
-                    targetY = 0;
-
-                }
-            );
-
-
-            function animate() {
-
-                requestAnimationFrame(animate);
-
-                mesh.rotation.y += 0.004;
-                mesh.rotation.x += 0.002;
-
-                mesh.rotation.y +=
-                    (targetX - mesh.rotation.y * 0.05) * 0.015;
-
-                mesh.rotation.x +=
-                    (targetY - mesh.rotation.x * 0.05) * 0.015;
-
-                renderer.render(
-                    scene,
-                    camera
-                );
-
-            }
-
-            animate();
-
-
-            function resizeScene() {
-
-                const width =
-                    container.clientWidth;
-
-                const height =
-                    container.clientHeight;
-
-                camera.aspect =
-                    width / height;
-
-                camera.updateProjectionMatrix();
-
-                renderer.setSize(
-                    width,
-                    height
-                );
-
-                renderer.setPixelRatio(
-                    Math.min(window.devicePixelRatio, 2)
-                );
-
-            }
-
-
-            window.addEventListener(
-                "resize",
-                resizeScene
-            );
-
-        }
-
-    </script>
-
+<body class="font-sans antialiased">
+
+  <!-- Nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-bg/90 backdrop-blur border-b border-zinc-800">
+    <nav class="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
+      <a href="#" class="font-medium text-white">Ryan</a>
+      <div class="flex items-center gap-6 text-sm text-zinc-400">
+        <a href="#work" class="hover:text-white">Work</a>
+        <a href="#about" class="hover:text-white">About</a>
+        <a href="mailto:flamzyxd12@gmail.com" class="text-accent hover:underline">Email</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-5 pt-24 pb-20">
+
+    <!-- Intro -->
+    <section class="mb-20">
+      <h1 class="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-4">
+        Hey, I’m Ryan.
+      </h1>
+      <p class="text-lg text-zinc-400 leading-relaxed max-w-xl">
+        Frontend developer. I build clean websites with HTML, CSS, JavaScript, React and Tailwind. Currently looking for freelance work.
+      </p>
+      
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href="#work" class="px-4 py-2 bg-white text-black text-sm font-medium rounded hover:bg-accent transition">
+          See my work
+        </a>
+        <a href="mailto:flamzyxd12@gmail.com" class="px-4 py-2 border border-zinc-700 text-sm rounded hover:border-zinc-500 transition">
+          Get in touch
+        </a>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section id="work" class="mb-20">
+      <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">Project</h2>
+      
+      <article class="card rounded-xl overflow-hidden">
+        <div class="h-52 sm:h-64 bg-zinc-900 flex items-center justify-center relative">
+          <div class="text-center">
+            <p class="font-mono text-sm text-zinc-500 mb-1">APEX MOTORS</p>
+            <p class="text-xs text-zinc-600">Car dealership site</p>
+          </div>
+        </div>
+        
+        <div class="p-6">
+          <div class="flex flex-wrap gap-2 mb-3">
+            <span class="text-xs px-2 py-0.5 bg-zinc-800 rounded text-zinc-400">HTML</span>
+            <span class="text-xs px-2 py-0.5 bg-zinc-800 rounded text-zinc-400">CSS</span>
+            <span class="text-xs px-2 py-0.5 bg-zinc-800 rounded text-zinc-400">JavaScript</span>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-white mb-2">Apex Motors</h3>
+          <p class="text-sm text-zinc-400 leading-relaxed mb-5">
+            A responsive car dealership website. Inventory browsing, vehicle detail pages, and clean mobile layouts. Built from scratch.
+          </p>
+          
+          <a href="https://flamzyxd12-byte.github.io/ApexMotors/" 
+             target="_blank" 
+             rel="noopener"
+             class="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+            View live site
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mb-20">
+      <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">About</h2>
+      
+      <div class="space-y-4 text-zinc-400 leading-relaxed">
+        <p>
+          I started learning web development about six months ago because I wanted to understand how sites actually work. Most of my time goes into building things, breaking them, and figuring out why.
+        </p>
+        <p>
+          I focus on frontend — layouts, interactions, and making things look good on every screen size. When a project needs auth or a database I use Firebase.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-10">
+        <div class="card rounded-lg p-4">
+          <p class="text-2xl font-semibold text-white">6+</p>
+          <p class="text-xs text-zinc-500 mt-1">months learning</p>
+        </div>
+        <div class="card rounded-lg p-4">
+          <p class="text-2xl font-semibold text-accent">1</p>
+          <p class="text-xs text-zinc-500 mt-1">live project</p>
+        </div>
+        <div class="card rounded-lg p-4 col-span-2 sm:col-span-1">
+          <p class="text-2xl font-semibold text-white">Web</p>
+          <p class="text-xs text-zinc-500 mt-1">frontend focused</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-20">
+      <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">What I use</h2>
+      
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="card rounded-lg p-5">
+          <h3 class="font-medium text-white mb-3">Frontend</h3>
+          <ul class="text-sm text-zinc-400 space-y-1">
+            <li>HTML / CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+          </ul>
+        </div>
+        <div class="card rounded-lg p-5">
+          <h3 class="font-medium text-white mb-3">Styling</h3>
+          <ul class="text-sm text-zinc-400 space-y-1">
+            <li>Tailwind CSS</li>
+            <li>Bootstrap</li>
+          </ul>
+        </div>
+        <div class="card rounded-lg p-5">
+          <h3 class="font-medium text-white mb-3">Other</h3>
+          <ul class="text-sm text-zinc-400 space-y-1">
+            <li>GitHub</li>
+            <li>Firebase</li>
+            <li>Vercel</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="mb-10">
+      <h2 class="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-6">Contact</h2>
+      
+      <p class="text-zinc-400 mb-6">
+        Have a project? Just email me or add me on Discord.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="mailto:flamzyxd12@gmail.com" 
+           class="card rounded-lg px-5 py-4 flex items-center gap-3 hover:border-accent transition">
+          <i class="fa-solid fa-envelope text-accent"></i>
+          <span class="text-sm">flamzyxd12@gmail.com</span>
+        </a>
+        
+        <button onclick="copyDiscord()" 
+                class="card rounded-lg px-5 py-4 flex items-center gap-3 hover:border-indigo-500 transition text-left">
+          <i class="fa-brands fa-discord text-indigo-400"></i>
+          <span class="text-sm" id="discord-text">itsroyzex</span>
+          <i class="fa-regular fa-copy text-xs text-zinc-600 ml-auto" id="copy-icon"></i>
+        </button>
+      </div>
+      
+      <p id="copied" class="text-xs text-accent mt-3 opacity-0 transition">Copied</p>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-zinc-800 py-8">
+    <div class="max-w-3xl mx-auto px-5 flex justify-between items-center text-xs text-zinc-600">
+      <span>© 2026 Ryan</span>
+      <a href="#" class="hover:text-zinc-400">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    function copyDiscord() {
+      navigator.clipboard.writeText("itsroyzex").then(() => {
+        const msg = document.getElementById("copied");
+        const icon = document.getElementById("copy-icon");
+        msg.classList.remove("opacity-0");
+        icon.className = "fa-solid fa-check text-xs text-accent ml-auto";
+        setTimeout(() => {
+          msg.classList.add("opacity-0");
+          icon.className = "fa-regular fa-copy text-xs text-zinc-600 ml-auto";
+        }, 1500);
+      });
+    }
+  </script>
 </body>
 </html>
