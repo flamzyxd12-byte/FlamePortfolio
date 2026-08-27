@@ -21,14 +21,37 @@
     }
 
     html { scroll-behavior: smooth; }
+    
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(255, 255, 255, 0.045), transparent 38%),
+    var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text-primary);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 900px;
+  height: 100%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.18;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
 
     .portfolio-wrapper {
       max-width: 900px;
@@ -36,7 +59,6 @@
       padding: 0 24px;
     }
 
-    /* Navbar */
     .nav {
       display: flex;
       align-items: center;
@@ -67,12 +89,10 @@
       color: var(--text-primary);
     }
 
-    /* Sections */
     section {
       margin-bottom: 88px;
     }
 
-    /* Hero */
     .hero {
       padding: 48px 0 32px;
     }
@@ -134,7 +154,6 @@
       height: 16px;
     }
 
-    /* Section headers */
     .section-label {
       font-size: 12px;
       font-weight: 500;
@@ -150,7 +169,6 @@
       line-height: 1.2;
     }
 
-    /* About */
     .about-text {
       font-size: 16px;
       color: var(--text-secondary);
@@ -161,7 +179,6 @@
       margin: 0 0 16px;
     }
 
-    /* Skills */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -207,7 +224,6 @@
       height: 14px;
     }
 
-    /* Projects */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -308,7 +324,6 @@
       height: 14px;
     }
 
-    /* Process */
     .process-steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -336,7 +351,6 @@
       line-height: 1.5;
     }
 
-    /* Contact */
     .contact-box {
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -378,7 +392,6 @@
       height: 16px;
     }
 
-    /* Footer */
     .footer {
       text-align: center;
       padding: 32px 0;
@@ -387,7 +400,6 @@
       color: var(--text-quaternary);
     }
 
-    /* Responsive */
     @media (max-width: 640px) {
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 13px; }
