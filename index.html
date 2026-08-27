@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ryan.Dev — Front-End Developer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0b;
+      --surface: #111113;
+      --surface-muted: #161618;
+      --surface-raised: #1c1c1f;
+      --border: #262629;
+      --text-primary: #f0f0f2;
+      --text-secondary: #a0a0a8;
+      --text-tertiary: #6e6e78;
+      --text-quaternary: #4a4a52;
+      --accent: #7c7c8a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .portfolio-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navbar */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      margin-bottom: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 96px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 48px 0 32px;
+    }
+    .hero-name {
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin: 0 0 16px;
+      color: var(--text-primary);
+    }
+    .hero-tagline {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin: 0 0 20px;
+      line-height: 1.4;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-tertiary);
+      max-width: 520px;
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-primary);
+    }
+    .btn:hover {
+      background: var(--surface-muted);
+    }
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg);
+      border-color: var(--text-primary);
+    }
+    .btn-primary:hover {
+      background: var(--text-secondary);
+      border-color: var(--text-secondary);
+    }
+    .btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Section headers */
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-quaternary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 24px;
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 500;
+      margin: 0 0 20px;
+      line-height: 1.2;
+    }
+
+    /* About */
+    .about-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+    .about-text p {
+      margin: 0 0 16px;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+    }
+    .skill-group h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin: 0 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-group h3 svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text-quaternary);
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .skill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+    .skill-tag:hover {
+      background: var(--surface-raised);
+      color: var(--text-primary);
+    }
+    .skill-tag svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: var(--surface);
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--text-quaternary);
+    }
+    .project-thumb {
+      height: 160px;
+      background: var(--surface-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .project-thumb svg {
+      width: 40px;
+      height: 40px;
+      color: var(--text-quaternary);
+    }
+    .project-thumb .placeholder-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-quaternary);
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+    }
+    .project-info {
+      padding: 20px;
+    }
+    .project-info h3 {
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0 0 8px;
+    }
+    .project-info p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin: 0 0 16px;
+      line-height: 1.5;
+    }
+    .project-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .project-tech {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .tech-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface-muted);
+      color: var(--text-tertiary);
+      border: 1px solid var(--border);
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+    .project-link:hover {
+      gap: 6px;
+    }
+    .project-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Process */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+    .step {
+      position: relative;
+    }
+    .step-num {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-quaternary);
+      margin: 0 0 12px;
+      letter-spacing: 0.04em;
+    }
+    .step h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 8px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Contact */
+    .contact-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      background: var(--surface);
+    }
+    .contact-box h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin: 0 0 12px;
+    }
+    .contact-box p {
+      font-size: 15px;
+      color: var(--text-tertiary);
+      margin: 0 0 24px;
+    }
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--surface-muted);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .contact-email:hover {
+      background: var(--surface-raised);
+      border-color: var(--text-quaternary);
+    }
+    .contact-email svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-quaternary);
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: 13px; }
+      .hero-name { font-size: 32px; }
+      .hero-tagline { font-size: 18px; }
+      .section-title { font-size: 24px; }
+      .contact-box { padding: 28px 20px; }
+      section { margin-bottom: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="portfolio-wrapper">
+    <!-- Navbar -->
+    <nav class="nav">
+      <div class="nav-logo">Ryan.Dev</div>
+      <ul class="nav-links">
+        <li><a onclick="scrollToSection('home')">Home</a></li>
+        <li><a onclick="scrollToSection('about')">About</a></li>
+        <li><a onclick="scrollToSection('projects')">Demo Websites</a></li>
+        <li><a onclick="scrollToSection('skills')">Skills</a></li>
+        <li><a onclick="scrollToSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero visible">
+      <h1 class="hero-name">Hey, I'm a front-end developer.</h1>
+      <p class="hero-tagline">I build clean, responsive websites that actually feel good to use.</p>
+      <p class="hero-desc">I enjoy turning ideas into real interfaces. I focus on writing solid HTML, CSS, and JavaScript — and I am always learning something new to get better.</p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary" onclick="scrollToSection('projects')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          View demo websites
+        </a>
+        <a class="btn" onclick="scrollToSection('contact')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact me
+        </a>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <p class="section-label">About</p>
+      <h2 class="section-title">I like making things for the web.</h2>
+      <div class="about-text">
+        <p>I got into web development because I enjoy the mix of logic and design. There is something satisfying about writing code and seeing a real interface come together on screen.</p>
+        <p>These days I spend most of my time building with React, Tailwind CSS, and plain JavaScript. I care about responsive design, clean code, and small details that make a site feel polished.</p>
+        <p>When I am not working on projects, I am usually learning something new — whether that is a CSS technique I have not tried, a React pattern, or just improving how I structure my code.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">Technologies I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Frontend
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Tools
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Other
+          </h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Responsive design</span>
+            <span class="skill-tag">UI implementation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Websites -->
+    <section id="projects">
+      <p class="section-label">Demo websites</p>
+      <h2 class="section-title">Things I have built</h2>
+      <div class="projects-grid">
+        <!-- Apex Motors -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>Apex Motors</h3>
+            <p>A responsive automotive website designed to present vehicles and their information through a clean, modern interface.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-pill">HTML</span>
+                <span class="tech-pill">CSS</span>
+                <span class="tech-pill">JavaScript</span>
+              </div>
+              <a class="project-link" href="https://flamzyxd12-byte.github.io/ApexMotors/" target="_blank" rel="noopener">
+                Live preview
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder 1 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <span class="placeholder-badge">Placeholder</span>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>Project coming soon</h3>
+            <p>This spot is reserved for a future project. I am currently working on something new.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-pill">TBD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder 2 -->
+        <div class="project-card">
+          <div class="project-thumb">
+            <span class="placeholder-badge">Placeholder</span>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="project-info">
+            <h3>Project coming soon</h3>
+            <p>This spot is reserved for a future project. Check back later for updates.</p>
+            <div class="project-meta">
+              <div class="project-tech">
+                <span class="tech-pill">TBD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process">
+      <p class="section-label">Process</p>
+      <h2 class="section-title">How I work</h2>
+      <div class="process-steps">
+        <div class="step">
+          <p class="step-num">01 — Understand</p>
+          <h3>Figure out what the website needs</h3>
+          <p>I start by understanding the goal. What should the site do? Who is it for? What matters most?</p>
+        </div>
+        <div class="step">
+          <p class="step-num">02 — Build</p>
+          <h3>Turn the idea into a responsive interface</h3>
+          <p>I write clean, structured code and focus on making the layout work well on every screen size.</p>
+        </div>
+        <div class="step">
+          <p class="step-num">03 — Refine</p>
+          <h3>Fix details, improve responsiveness, and polish</h3>
+          <p>I go back through everything — spacing, interactions, edge cases — until it feels right.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <p class="section-label">Contact</p>
+      <div class="contact-box">
+        <h2>Have a website idea? Let's build it.</h2>
+        <p>I am open to freelance work and interesting projects. If you have something in mind, send me a message.</p>
+        <a class="contact-email" href="mailto:flamzyxd12@gmail.com">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          flamzyxd12@gmail.com
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+      Built with care. No templates, no fake stats.
+    </div>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
