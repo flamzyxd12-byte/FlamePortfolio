@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ryan.Dev — Front-End Developer</title>
+  <title>Ryan — Front-End Developer</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -42,7 +42,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 20px 0;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
@@ -69,14 +69,7 @@
 
     /* Sections */
     section {
-      margin-bottom: 96px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
+      margin-bottom: 88px;
     }
 
     /* Hero */
@@ -414,21 +407,20 @@
       <ul class="nav-links">
         <li><a onclick="scrollToSection('home')">Home</a></li>
         <li><a onclick="scrollToSection('about')">About</a></li>
-        <li><a onclick="scrollToSection('projects')">Demo Websites</a></li>
-        <li><a onclick="scrollToSection('skills')">Skills</a></li>
+        <li><a onclick="scrollToSection('projects')">Projects</a></li>
         <li><a onclick="scrollToSection('contact')">Contact</a></li>
       </ul>
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="hero visible">
+    <section id="home" class="hero">
       <h1 class="hero-name">Hey, I'm a front-end developer.</h1>
-      <p class="hero-tagline">I build clean, responsive websites that actually feel good to use.</p>
-      <p class="hero-desc">I enjoy turning ideas into real interfaces. I focus on writing solid HTML, CSS, and JavaScript — and I am always learning something new to get better.</p>
+      <p class="hero-tagline">I make websites with HTML, CSS, and JavaScript.</p>
+      <p class="hero-desc">I'm still learning, but I enjoy building things and improving them as I go. Most of my projects start as an idea and end up as a working website.</p>
       <div class="hero-buttons">
         <a class="btn btn-primary" onclick="scrollToSection('projects')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          View demo websites
+          See my work
         </a>
         <a class="btn" onclick="scrollToSection('contact')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -440,59 +432,26 @@
     <!-- About -->
     <section id="about">
       <p class="section-label">About</p>
-      <h2 class="section-title">I like making things for the web.</h2>
+      <h2 class="section-title">A little about me</h2>
       <div class="about-text">
-        <p>I got into web development because I enjoy the mix of logic and design. There is something satisfying about writing code and seeing a real interface come together on screen.</p>
-        <p>These days I spend most of my time building with React, Tailwind CSS, and plain JavaScript. I care about responsive design, clean code, and small details that make a site feel polished.</p>
-        <p>When I am not working on projects, I am usually learning something new — whether that is a CSS technique I have not tried, a React pattern, or just improving how I structure my code.</p>
+        <p>I got into web development because I liked being able to make an idea into something I could actually open in a browser.</p>
+        <p>Right now I mostly work with HTML, CSS, JavaScript, and I'm learning more React. I like keeping things simple and making sure the site works properly on different screen sizes.</p>
+        <p>I'm still figuring things out and learning with every project. That's probably the part of web development I enjoy most.</p>
       </div>
     </section>
 
     <!-- Skills -->
     <section id="skills">
       <p class="section-label">Skills</p>
-      <h2 class="section-title">Technologies I work with</h2>
+      <h2 class="section-title">What I use</h2>
       <div class="skills-grid">
-        <div class="skill-group">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Frontend
-          </h3>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Tailwind CSS</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            Tools
-          </h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <h3>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Other
-          </h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Responsive design</span>
-            <span class="skill-tag">UI implementation</span>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- Demo Websites -->
     <section id="projects">
       <p class="section-label">Demo websites</p>
-      <h2 class="section-title">Things I have built</h2>
+      <h2 class="section-title">A few things I've made</h2>
       <div class="projects-grid">
         <!-- Apex Motors -->
 <div class="project-card">
@@ -502,7 +461,7 @@
 
   <div class="project-info">
     <h3>Apex Motors</h3>
-    <p>A responsive automotive website designed to present vehicles and their information through a clean, modern interface.</p>
+    <p>A car website I made to practice layouts, cards, navigation, and responsive design.</p>
 
     <div class="project-meta">
       <div class="project-tech">
@@ -586,8 +545,8 @@
     <section id="contact">
       <p class="section-label">Contact</p>
       <div class="contact-box">
-        <h2>Have a website idea? Let's build it.</h2>
-        <p>I am open to freelance work and interesting projects. If you have something in mind, send me a message.</p>
+        <h2>Want a website?</h2>
+        <p>If you have an idea for a website, feel free to email me. I'm open to small freelance projects.</p>
         <a class="contact-email" href="mailto:flamzyxd12@gmail.com">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           flamzyxd12@gmail.com
@@ -597,7 +556,7 @@
 
     <!-- Footer -->
     <div class="footer">
-      Built with passion - Ryan
+      © 2026 Ryan
     </div>
   </div>
 
@@ -609,17 +568,6 @@
       }
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
-    });
   </script>
 </body>
 </html>
